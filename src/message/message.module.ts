@@ -1,14 +1,18 @@
 import { Module } from '@nestjs/common';
 import { MessageService } from './message.service';
 import { MessageController } from './message.controller';
-import { User, UserSchema } from 'src/users/schema/user.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { Message, MessageSchema } from './schema/message.schema';
+import { User, UserSchema } from 'src/users/schema/user.schema';
+import { Room, RoomSchema } from 'src/room/schema/room.schema';
+import { File, FileSchema } from 'src/files/schema/files.schema';
+import { FilesService } from 'src/files/files.service';
+import { S3Service } from 'src/files/helpers/s3.helper';
 
 @Module({
   controllers: [MessageController],
-  providers: [MessageService, JwtStrategy],
+  providers: [MessageService, JwtStrategy, FilesService, S3Service],
   imports: [
     MongooseModule.forFeature([
       {
@@ -18,6 +22,14 @@ import { Message, MessageSchema } from './schema/message.schema';
       {
         name: Message.name,
         schema: MessageSchema,
+      },
+      {
+        name: Room.name,
+        schema: RoomSchema,
+      },
+      {
+        name: File.name,
+        schema: FileSchema,
       },
     ]),
   ],

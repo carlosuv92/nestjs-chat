@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './schema/user.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 @Injectable()
 export class UsersService {
@@ -19,8 +19,11 @@ export class UsersService {
     return users;
   }
 
-  async findOne(id: number) {
-    const user = await this.userModel.findOne({ user_id: id }).exec();
+  async findOne(id: Types.ObjectId) {
+    const user = await this.userModel.findOne({ _id: id }).exec();
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
     return user;
   }
 

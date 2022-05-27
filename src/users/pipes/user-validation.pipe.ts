@@ -18,17 +18,17 @@ export class EmailValidationPipe implements PipeTransform {
   }
 }
 
-export class UserValidationPipe implements PipeTransform {
+export class UserIdValidationPipe implements PipeTransform {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
   async transform(value: any) {
-    const { sender_id } = value;
-    if (!(await this.isUserExists(sender_id))) {
-      throw new BadRequestException('User does not exist');
+    const { user_id } = value;
+    if (await this.isUniqueEmail(user_id)) {
+      throw new BadRequestException('UserId already exists');
     }
     return value;
   }
 
-  private isUserExists(id: Schema.Types.ObjectId) {
-    return this.userModel.findOne({ _id: id }).exec();
+  private isUniqueEmail(user_id: Number) {
+    return this.userModel.findOne({ user_id }).exec();
   }
 }

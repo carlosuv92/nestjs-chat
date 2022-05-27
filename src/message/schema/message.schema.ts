@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Document, Types } from 'mongoose';
+import { Reaction } from 'src/reactions/schema/reactions.schema';
+import { Room } from 'src/room/schema/room.schema';
 import { User } from 'src/users/schema/user.schema';
 
 export type MessageDocument = Message & Document;
@@ -9,29 +11,34 @@ export class Message {
   @Prop({ required: true })
   message: string;
 
-  @Prop({ required: true, ref: User.name, type: MongooseSchema.Types.ObjectId })
-  sender_id: MongooseSchema.Types.ObjectId;
+  @Prop({ required: true, ref: User.name, type: Types.ObjectId })
+  sender_id: Types.ObjectId;
 
-  @Prop({ required: true })
-  room_id: number;
+  @Prop({ required: true, ref: Room.name, type: Types.ObjectId })
+  room_id: Types.ObjectId;
 
   @Prop({ required: true })
   type: string;
 
-  @Prop()
+  @Prop({ default: false })
   read: boolean;
 
-  @Prop()
-  attachment: string;
+  @Prop({ type: [{ reaction_id: { ref: Reaction.name, type: Types.ObjectId }, users: [{ ref: User.name, type: Types.ObjectId }] }] })
+  reactions: [
+    {
+      reaction_id: Types.ObjectId;
+      users: Types.ObjectId[];
+    },
+  ];
 
-  @Prop()
-  attachment_type: string;
+  @Prop({ ref: Message.name, type: Types.ObjectId })
+  quote: string;
 
-  @Prop()
-  attachment_name: string;
+  @Prop({ ref: Message.name, type: Types.ObjectId })
+  forward: string;
 
-  @Prop()
-  attachment_size: number;
+  @Prop({ default: false })
+  edited: boolean;
 
   @Prop({ required: true, default: Date.now })
   created_at: Date;

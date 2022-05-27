@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { User } from 'src/users/schema/user.schema';
 
 export type RoomDocument = Room & Document;
@@ -15,8 +15,8 @@ export class Room {
   @Prop()
   avatar: string;
 
-  @Prop({ required: true, ref: User.name, type: [MongooseSchema.Types.ObjectId] })
-  participants: [MongooseSchema.Types.ObjectId];
+  @Prop({ required: true, ref: User.name, type: [Types.ObjectId] })
+  participants: [Types.ObjectId];
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);

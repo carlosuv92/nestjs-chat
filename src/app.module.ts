@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { MessageModule } from './message/message.module';
 import { RoomModule } from './room/room.module';
+import { FilesModule } from './files/files.module';
+import { ReactionsModule } from './reactions/reactions.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { RoomModule } from './room/room.module';
     AuthModule,
     MessageModule,
     RoomModule,
+    FilesModule,
+    ReactionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

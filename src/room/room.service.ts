@@ -11,4 +11,8 @@ export class RoomService {
     const room = new this.roomModel(roomDto);
     return room.save();
   }
+
+  async findAll() {
+    return this.roomModel.find().populate('participants', '_id name');
+  }
 }
