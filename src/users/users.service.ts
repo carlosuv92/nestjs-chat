@@ -4,10 +4,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './schema/user.schema';
 import { Model, Types } from 'mongoose';
+import { FileDocument } from 'src/files/schema/files.schema';
+import { File } from 'src/files/schema/files.schema';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, @InjectModel(File.name) private filesModel: Model<FileDocument>) {}
 
   async create(createUserDto: CreateUserDto) {
     const user = this.userModel.create(createUserDto);

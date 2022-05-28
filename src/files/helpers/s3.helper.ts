@@ -29,7 +29,7 @@ export class S3Service {
     };
 
     try {
-      let s3Response = await this.s3.upload(params).promise();
+      await this.s3.upload(params).promise();
     } catch (e) {
       console.log(e);
     }
@@ -43,8 +43,7 @@ export class S3Service {
     };
 
     try {
-      let s3Response = await this.s3.getSignedUrl('getObject', params);
-      console.log(s3Response);
+      await this.s3.getSignedUrl('getObject', params);
     } catch (e) {
       console.log(e);
     }

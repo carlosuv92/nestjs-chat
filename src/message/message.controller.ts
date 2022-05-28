@@ -27,7 +27,8 @@ export class MessageController {
     try {
       const message = this.messageService.newMessage(messageDto);
       const { _id, room_id } = await message;
-      this.filesService.saveFiles(files, _id);
+      this.filesService.saveMessageFiles(files, _id);
+      return { _id, room_id };
     } catch (error) {}
     return;
   }

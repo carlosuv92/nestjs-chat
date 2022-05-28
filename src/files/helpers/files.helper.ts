@@ -1,3 +1,5 @@
+import { BadRequestException } from '@nestjs/common';
+
 export const renameImage = (req, file, cb) => {
   const randomName = Math.floor(Math.random() * 1000000);
   const extension = file.originalname.split('.')[1];
@@ -15,4 +17,22 @@ export const isImage = file => {
     return true;
   }
   return false;
+};
+
+export const renameAvatar = (req, file, cb) => {
+  const name = 'avatar';
+  const extension = file.originalname.split('.')[1];
+  if (extension === undefined) {
+    cb(null, `${name}`);
+  } else {
+    cb(null, `${name}.${extension}`);
+  }
+};
+
+export const filterOnlyImage = (req, file, cb) => {
+  if (isImage(file)) {
+    cb(null, true);
+  } else {
+    cb(new BadRequestException('Only image files are allowed'), false);
+  }
 };
