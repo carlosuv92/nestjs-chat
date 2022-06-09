@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, UseGuards, ValidationPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe, UseInterceptors, UploadedFile, HttpException } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -29,10 +29,16 @@ export class UsersController {
   )
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async create(@Body(EmailValidationPipe, UserIdValidationPipe) createUserDto: CreateUserDto, @UploadedFile() file: Express.Multer.File) {
-    // const { _id } = await this.usersService.create(createUserDto);
-    const avatar = this.filesService.saveAvatar(file, '_id');
-    // this.usersService.updateAvatar(+_id, avatar);
-    return true;
+    try {
+      const { _id } = await this.usersService.create(createUserDto);
+      if (file) {
+        const avatar = this.filesService.saveAvatar(file, _id);
+        await this.usersService.updateAvatar(_id, String(avatar));
+      }
+      return this.usersService.findOne(_id);
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
   // @UseGuards(JwtAuthGuard)

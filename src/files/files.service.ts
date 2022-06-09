@@ -31,9 +31,8 @@ export class FilesService {
     console.log(file);
 
     const path = `avatars/${user_id}/${file.filename}`;
-    console.log(path);
 
-    /* this.s3Service.uploadFile(file, path);
+    this.s3Service.uploadFile(file, path);
 
     const avatar = {
       user_id,
@@ -43,6 +42,7 @@ export class FilesService {
       size: file.size,
       path: path,
     };
-    this.fileModel.create(avatar);*/
+
+    return path;
   }
 }

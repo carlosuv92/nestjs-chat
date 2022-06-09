@@ -30,6 +30,7 @@ export class S3Service {
 
     try {
       await this.s3.upload(params).promise();
+      console.log('Route: ', `https://${bucket}.s3.amazonaws.com/${name}`);
     } catch (e) {
       console.log(e);
     }

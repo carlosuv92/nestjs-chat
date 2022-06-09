@@ -1,8 +1,8 @@
 import { Controller, Post, Body, UseFilters, UseInterceptors, UsePipes, Get } from '@nestjs/common';
 import { ValidateMultipleObjectId } from 'src/commons/pipes/validation.pipe';
 import { RoomDto } from './dto/room.dto';
-import { NewRoomInterceptor } from './room.interceptor';
-import { RoomService } from './room.service';
+import { NewRoomInterceptor } from './rooms.interceptor';
+import { RoomService } from './rooms.service';
 
 @Controller('room')
 export class RoomController {

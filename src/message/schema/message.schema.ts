@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 import { Reaction } from 'src/reactions/schema/reactions.schema';
-import { Room } from 'src/room/schema/room.schema';
+import { Room } from 'src/rooms/schema/room.schema';
 import { User } from 'src/users/schema/user.schema';
 
 export type MessageDocument = Message & Document;

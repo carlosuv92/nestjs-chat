@@ -16,13 +16,23 @@ export class UsersService {
     return user;
   }
 
+  async updateAvatar(id: Types.ObjectId, avatar: string) {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    user.avatar = avatar;
+    await user.save();
+    return user;
+  }
+
   async findAll() {
     const users = await this.userModel.find().exec();
     return users;
   }
 
   async findOne(id: Types.ObjectId) {
-    const user = await this.userModel.findOne({ _id: id }).exec();
+    const user = await this.userModel.findOne({ _id: id });
     if (!user) {
       throw new BadRequestException('User not found');
     }

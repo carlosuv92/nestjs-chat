@@ -23,8 +23,6 @@ export class UserIdValidationPipe implements PipeTransform {
 export class EmailValidationPipe implements PipeTransform {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
   async transform(value: any) {
-    console.log(value, 'aquo');
-
     const { email } = value;
     if (await this.isUniqueEmail(email)) {
       throw new BadRequestException('Email already exists');

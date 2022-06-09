@@ -16,7 +16,7 @@ export class MessageController {
   @Post('/send')
   @UseInterceptors(SendMessageInterceptor)
   @UseInterceptors(
-    FilesInterceptor('files', 10, {
+    FilesInterceptor('files', 100, {
       storage: diskStorage({
         destination: './files/',
         filename: renameImage,
@@ -27,7 +27,9 @@ export class MessageController {
     try {
       const message = this.messageService.newMessage(messageDto);
       const { _id, room_id } = await message;
-      this.filesService.saveMessageFiles(files, _id);
+      if (files) {
+        await this.filesService.saveMessageFiles(files, _id);
+      }
       return { _id, room_id };
     } catch (error) {}
     return;

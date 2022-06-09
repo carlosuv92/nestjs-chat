@@ -2,7 +2,7 @@ import { Injectable, NestInterceptor, ExecutionContext, CallHandler, BadRequestE
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Observable, of } from 'rxjs';
-import { Room, RoomDocument } from 'src/room/schema/room.schema';
+import { Room, RoomDocument } from 'src/rooms/schema/room.schema';
 import { User, UserDocument } from 'src/users/schema/user.schema';
 
 @Injectable()
