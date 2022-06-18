@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { FilesController } from './files.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { FileSchema, File } from './schema/files.schema';
+import { FileSchema, File } from './schema/file.schema';
 import { S3Service } from './helpers/s3.helper';
 
 @Module({

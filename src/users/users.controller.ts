@@ -62,4 +62,11 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
+
+  //More routes here
+
+  @Post('/import-users')
+  async importUsers() {
+    return await this.usersService.importUsers();
+  }
 }

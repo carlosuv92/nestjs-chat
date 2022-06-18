@@ -15,6 +15,9 @@ export class Room {
   @Prop()
   avatar: string;
 
+  @Prop()
+  type: string;
+
   @Prop({ required: true, ref: User.name, type: [Types.ObjectId] })
   participants: [Types.ObjectId];
 }

@@ -4,8 +4,9 @@ import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schema/user.schema';
 import { S3Service } from 'src/files/helpers/s3.helper';
-import { File, FileSchema } from 'src/files/schema/files.schema';
+import { File, FileSchema } from 'src/files/schema/file.schema';
 import { FilesService } from 'src/files/files.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   controllers: [UsersController],
@@ -21,6 +22,7 @@ import { FilesService } from 'src/files/files.service';
         schema: FileSchema,
       },
     ]),
+    HttpModule,
   ],
 })
 export class UsersModule {}

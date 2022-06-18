@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseFilters, UseInterceptors, UsePipes, Get } from '@nestjs/common';
+import { Controller, Post, Body, UseFilters, UseInterceptors, UsePipes, Get, Param } from '@nestjs/common';
 import { ValidateMultipleObjectId } from 'src/commons/pipes/validation.pipe';
 import { RoomDto } from './dto/room.dto';
 import { NewRoomInterceptor } from './rooms.interceptor';
@@ -17,5 +17,10 @@ export class RoomController {
   @Get()
   findAll() {
     return this.roomService.findAll();
+  }
+
+  @Get('/contacts/:id')
+  findContacts(@Param('id') id: string) {
+    return this.roomService.findContacts(id);
   }
 }

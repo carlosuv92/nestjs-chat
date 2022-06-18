@@ -5,9 +5,9 @@ import { diskStorage } from 'multer';
 import { ValidateObjectId } from 'src/commons/pipes/validation.pipe';
 import { FilesService } from 'src/files/files.service';
 import { renameImage } from 'src/files/helpers/files.helper';
-import { IdMessageDto, MessageDto, ReactionMessageDto, SeenDto, UpdateMessageDto } from './dto/message.dto';
-import { SendMessageInterceptor } from './message.interceptor';
-import { MessageService } from './message.service';
+import { IdMessageDto, MessageDto, ReactionMessageDto, SeenDto, UpdateMessageDto } from './dto/messages.dto';
+import { SendMessageInterceptor } from './messages.interceptor';
+import { MessageService } from './messages.service';
 
 @Controller('/message')
 export class MessageController {
@@ -31,8 +31,9 @@ export class MessageController {
         await this.filesService.saveMessageFiles(files, _id);
       }
       return { _id, room_id };
-    } catch (error) {}
-    return;
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Post('/edit')

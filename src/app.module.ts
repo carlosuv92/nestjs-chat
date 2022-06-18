@@ -5,7 +5,7 @@ import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { MessageModule } from './message/message.module';
+import { MessageModule } from './messages/messages.module';
 import { RoomModule } from './rooms/rooms.module';
 import { FilesModule } from './files/files.module';
 import { ReactionsModule } from './reactions/reactions.module';

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { IdMessageDto, MessageDto, ReactionMessageDto, SeenDto, UpdateMessageDto } from './dto/message.dto';
+import { IdMessageDto, MessageDto, ReactionMessageDto, SeenDto, UpdateMessageDto } from './dto/messages.dto';
 import { Message, MessageDocument } from './schema/message.schema';
-import { File, FileDocument } from 'src/files/schema/files.schema';
-import { formatMessage } from './helpers/message.helper';
+import { File, FileDocument } from 'src/files/schema/file.schema';
+import { formatMessage } from './helpers/messages.helper';
 
 @Injectable()
 export class MessageService {

@@ -8,7 +8,7 @@ export type MessageDocument = Message & Document;
 
 @Schema()
 export class Message {
-  @Prop({ required: true })
+  @Prop()
   message: string;
 
   @Prop({ required: true, ref: User.name, type: Types.ObjectId })

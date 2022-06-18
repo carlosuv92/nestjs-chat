@@ -4,7 +4,7 @@ import { String } from 'aws-sdk/clients/apigateway';
 import { Model, Types } from 'mongoose';
 import { isImage } from './helpers/files.helper';
 import { S3Service } from './helpers/s3.helper';
-import { File, FileDocument } from './schema/files.schema';
+import { File, FileDocument } from './schema/file.schema';
 
 @Injectable()
 export class FilesService {
