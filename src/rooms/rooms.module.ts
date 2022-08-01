@@ -4,6 +4,7 @@ import { RoomController } from './rooms.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/users/schema/user.schema';
 import { Room, RoomSchema } from './schema/room.schema';
+import { Message, MessageSchema } from 'src/messages/schema/message.schema';
 
 @Module({
   controllers: [RoomController],
@@ -17,6 +18,10 @@ import { Room, RoomSchema } from './schema/room.schema';
       {
         name: Room.name,
         schema: RoomSchema,
+      },
+      {
+        name: Message.name,
+        schema: MessageSchema,
       },
     ]),
   ],

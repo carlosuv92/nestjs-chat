@@ -18,13 +18,13 @@ export class SendMessageInterceptor implements NestInterceptor {
     let { room_id, receiver_id, type, message } = message_data;
 
     if (type === 'text' && !message && files.length === 0) throw new BadRequestException('Message is required');
-    if (!(await this.isUserExists(receiver_id))) throw new BadRequestException('User not found');
     if (room_id) {
       const validObjectId = Types.ObjectId.isValid(room_id);
       if (!validObjectId) throw new BadRequestException('Invalid room id');
       if (!(await this.isRoomExists(room_id))) throw new BadRequestException('Room not found');
     } else {
-      let newRoom = await this.roomModel.create({ participants: [message_data.sender_id, message_data.receiver_id] });
+      if (!(await this.isUserExists(receiver_id))) throw new BadRequestException('User not found');
+      let newRoom = await this.roomModel.create({ participants: [message_data.sender_id, message_data.receiver_id], type: 'user' });
       message_data.room_id = newRoom.id;
     }
     req.body = message_data;

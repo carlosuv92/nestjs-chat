@@ -15,8 +15,9 @@ export class Room {
   @Prop()
   avatar: string;
 
-  @Prop()
-  type: string;
+  //create enum
+  @Prop({ enum: ['user', 'group'], default: 'group' })
+  type: 'user' | 'group';
 
   @Prop({ required: true, ref: User.name, type: [Types.ObjectId] })
   participants: [Types.ObjectId];
